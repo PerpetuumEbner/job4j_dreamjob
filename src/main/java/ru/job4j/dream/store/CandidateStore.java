@@ -1,7 +1,9 @@
 package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.Post;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,9 +20,18 @@ public class CandidateStore {
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private CandidateStore() {
-        candidates.put(1, new Candidate(1, "Junior Java Job"));
-        candidates.put(2, new Candidate(2, "Middle Java Job"));
-        candidates.put(3, new Candidate(3, "Senior Java Job"));
+        candidates.put(1, new Candidate(
+                1, "Junior Java Job",
+                "Collections",
+                LocalDate.of(2022, 04, 1)));
+        candidates.put(2, new Candidate(
+                2, "Middle Java Job",
+                "IO, SQl, GC",
+                LocalDate.of(2022, 04, 5)));
+        candidates.put(3, new Candidate(
+                3, "Senior Java Job",
+                "Spring, Hibernate",
+                LocalDate.of(2022, 04, 11)));
     }
 
     public static CandidateStore instOf() {

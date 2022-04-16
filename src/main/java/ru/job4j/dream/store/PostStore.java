@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Хранилище в котором находятся вакансии.
@@ -17,6 +18,8 @@ public class PostStore {
     private static final PostStore INST = new PostStore();
 
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
+
+    private final AtomicInteger ID = new AtomicInteger();
 
     private PostStore() {
         posts.put(1, new Post(
@@ -42,6 +45,7 @@ public class PostStore {
     }
 
     public void add(Post post) {
+        post.setId(ID.incrementAndGet());
         posts.put(post.getId(), post);
     }
 }

@@ -19,7 +19,7 @@ public class PostStore {
 
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
-    private final AtomicInteger ID = new AtomicInteger(3);
+    private final AtomicInteger ID = new AtomicInteger();
 
     private PostStore() {
         posts.put(1, new Post(
@@ -47,5 +47,13 @@ public class PostStore {
     public void add(Post post) {
         post.setId(ID.incrementAndGet());
         posts.put(post.getId(), post);
+    }
+
+    public void update(Post post) {
+        posts.replace(post.getId(), post);
+    }
+
+    public Post findById(int id) {
+        return posts.get(id);
     }
 }

@@ -1,5 +1,6 @@
 package ru.job4j.dream.store;
 
+import net.jcip.annotations.ThreadSafe;
 import ru.job4j.dream.model.Candidate;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author yustas
  * @version 1.0
  */
+@ThreadSafe
 public class CandidateStore {
     private static final CandidateStore INST = new CandidateStore();
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.service.CityService;
 import ru.job4j.dream.service.PostService;
 
 @ThreadSafe
@@ -16,8 +17,11 @@ public class PostController {
 
     private final PostService store;
 
-    public PostController(PostService store) {
+    private final CityService city;
+
+    public PostController(PostService store, CityService city) {
         this.store = store;
+        this.city = city;
     }
 
     @GetMapping("/posts")
@@ -28,7 +32,7 @@ public class PostController {
 
     @GetMapping("/formAddPost")
     public String addPost(Model model) {
-        model.addAttribute("post", new Post(0, "Заполните поле"));
+        model.addAttribute("cities", city.getAllCities());
         return "addPost";
     }
 

@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.stereotype.Repository;
 import ru.job4j.dream.model.Candidate;
 
 import java.time.LocalDate;
@@ -16,8 +17,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version 1.0
  */
 @ThreadSafe
+@Repository
 public class CandidateStore {
-    private static final CandidateStore INST = new CandidateStore();
 
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
@@ -36,10 +37,6 @@ public class CandidateStore {
                 3, "Senior Java Job",
                 "Spring, Hibernate",
                 LocalDate.of(2022, 04, 11)));
-    }
-
-    public static CandidateStore instOf() {
-        return INST;
     }
 
     public Collection<Candidate> findAll() {

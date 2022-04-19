@@ -1,7 +1,7 @@
 package ru.job4j.dream.service;
 
 import net.jcip.annotations.ThreadSafe;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.store.CandidateStore;
 
@@ -14,15 +14,13 @@ import java.util.Collection;
  * @version 1.0
  */
 @ThreadSafe
-@Controller
+@Service
 public class CandidateService {
 
-    private static final CandidateService INST = new CandidateService();
+    private final CandidateStore store;
 
-    private final CandidateStore store = CandidateStore.instOf();
-
-    public static CandidateService instOf() {
-        return INST;
+    public CandidateService(CandidateStore store) {
+        this.store = store;
     }
 
     public Collection<Candidate> findAll() {

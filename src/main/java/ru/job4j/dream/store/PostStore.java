@@ -22,7 +22,7 @@ public class PostStore {
 
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
-    private final AtomicInteger ID = new AtomicInteger();
+    private final AtomicInteger ID = new AtomicInteger(3);
 
     private PostStore() {
         posts.put(1, new Post(

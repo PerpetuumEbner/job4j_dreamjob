@@ -37,7 +37,8 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public String createPost(@ModelAttribute Post post) {
+    public String createPost(@ModelAttribute Post post, int id) {
+        post.setCity(city.findById(id));
         store.add(post);
         return "redirect:/posts";
     }
@@ -51,6 +52,7 @@ public class PostController {
     @GetMapping("/formUpdatePost/{postId}")
     public String formUpdatePost(Model model, @PathVariable("postId") int id) {
         model.addAttribute("post", store.findById(id));
+        model.addAttribute("cities", city.findById(id));
         return "updatePost";
     }
 }

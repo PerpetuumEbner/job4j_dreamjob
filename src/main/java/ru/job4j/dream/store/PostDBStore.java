@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * В классе происходит обработка данных в базе данных.
+ * В классе происходит обработка вакансий в базе данных.
  *
  * @author yustas
  * @version 1.0

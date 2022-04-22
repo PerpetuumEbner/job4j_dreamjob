@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.dream.model.Post;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -54,11 +55,15 @@ public class PostDBStore {
      */
     public Post add(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO post(name, city_id) VALUES (?, ?)",
+             PreparedStatement ps = cn.prepareStatement(
+                     "INSERT INTO post(name, description, created, visible, city_id) VALUES (?, ?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, post.getName());
-            ps.setInt(2, post.getCity().getId());
+            ps.setString(2, post.getDescription());
+            ps.setDate(3, Date.valueOf(post.getCreated()));
+            ps.setBoolean(4, post.isVisible());
+            ps.setInt(5, post.getCity().getId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -78,7 +83,8 @@ public class PostDBStore {
      */
     public void update(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("UPDATE post SET name = ?, city_id = ? WHERE id = ?")
+             PreparedStatement ps = cn.prepareStatement(
+                     "UPDATE post SET name = ?, description = ?, created = ?, visible = ?, city_id = ? WHERE id = ?")
         ) {
             ps.setString(1, post.getName());
             ps.setInt(2, post.getCity().getId());

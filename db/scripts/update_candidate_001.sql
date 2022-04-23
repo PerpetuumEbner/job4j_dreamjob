@@ -1,4 +1,4 @@
-CREATE TABLE post
+CREATE TABLE candidate
 (
     id          serial primary key,
     name        text,

@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 
 import java.sql.Connection;
@@ -38,7 +39,13 @@ public class PostDBStore {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    posts.add(new Post(it.getInt("id"), it.getString("name")));
+                    posts.add(new Post(
+                            it.getInt("id"),
+                            it.getString("name"),
+                            it.getString("description"),
+                            it.getDate("created").toLocalDate(),
+                            it.getBoolean("visible"),
+                            new City(it.getInt("id"), it.getString("name"))));
                 }
             }
         } catch (Exception e) {
@@ -87,7 +94,10 @@ public class PostDBStore {
                      "UPDATE post SET name = ?, description = ?, created = ?, visible = ?, city_id = ? WHERE id = ?")
         ) {
             ps.setString(1, post.getName());
-            ps.setInt(2, post.getCity().getId());
+            ps.setString(2, post.getDescription());
+            ps.setDate(3, Date.valueOf(post.getCreated()));
+            ps.setBoolean(4, post.isVisible());
+            ps.setInt(5, post.getCity().getId());
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,7 +117,13 @@ public class PostDBStore {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return new Post(it.getInt("id"), it.getString("name"));
+                    return new Post(
+                            it.getInt("id"),
+                            it.getString("name"),
+                            it.getString("description"),
+                            it.getDate("created").toLocalDate(),
+                            it.getBoolean("visible"),
+                            new City(it.getInt("id"), it.getString("name")));
                 }
             }
         } catch (Exception e) {

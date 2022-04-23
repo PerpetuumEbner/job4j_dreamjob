@@ -5,5 +5,5 @@ CREATE TABLE post
     description text,
     created     date,
     visible     boolean,
-    city        text
+    city_id     int
 );

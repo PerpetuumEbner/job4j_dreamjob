@@ -58,6 +58,7 @@ public class UserDBStore {
      * @return Объект пользователя с добавленными параметрами.
      */
     public Optional<User> add(User user) {
+        Optional<User> optionalUser = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "INSERT INTO users(email, password) VALUES (?, ?)")
@@ -69,10 +70,11 @@ public class UserDBStore {
                     ps.execute();
                 }
             }
+            optionalUser = Optional.of(user);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Optional.ofNullable(user);
+        return optionalUser;
     }
 
     /**

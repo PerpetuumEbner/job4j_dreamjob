@@ -14,6 +14,7 @@ import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.service.CandidateService;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 @ThreadSafe
 @Controller
@@ -33,7 +34,11 @@ public class CandidateController {
 
     @GetMapping("/formAddCandidate")
     public String addCandidate(Model model) {
-        model.addAttribute("candidates", new Candidate(0, "Заполните поле"));
+        model.addAttribute("candidates", new Candidate(
+                0, "Заполните поле",
+                "Заполните поле",
+                LocalDate.now(),
+                new byte[0]));
         return "addCandidate";
     }
 

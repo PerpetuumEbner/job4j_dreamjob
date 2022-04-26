@@ -16,18 +16,6 @@ public class Candidate {
     private LocalDate created;
     private byte[] photo;
 
-    public Candidate(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Candidate(int id, String name, String description, LocalDate created) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.created = created;
-    }
-
     public Candidate(int id, String name, String description, LocalDate created, byte[] photo) {
         this.id = id;
         this.name = name;

@@ -28,15 +28,18 @@ public class CandidateStore {
         candidates.put(1, new Candidate(
                 1, "Junior Java Job",
                 "Collections",
-                LocalDate.of(2022, 04, 1)));
+                LocalDate.of(2022, 04, 1),
+                new byte[0]));
         candidates.put(2, new Candidate(
                 2, "Middle Java Job",
                 "IO, SQl, GC",
-                LocalDate.of(2022, 04, 5)));
+                LocalDate.of(2022, 04, 5),
+                new byte[0]));
         candidates.put(3, new Candidate(
                 3, "Senior Java Job",
                 "Spring, Hibernate",
-                LocalDate.of(2022, 04, 11)));
+                LocalDate.of(2022, 04, 11),
+                new byte[0]));
     }
 
     public Collection<Candidate> findAll() {

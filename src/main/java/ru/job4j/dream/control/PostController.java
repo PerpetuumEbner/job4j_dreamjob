@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.service.CityService;
 import ru.job4j.dream.service.PostService;
+
+import java.time.LocalDate;
 
 @ThreadSafe
 @Controller
@@ -32,6 +35,12 @@ public class PostController {
 
     @GetMapping("/formAddPost")
     public String addPost(Model model) {
+        model.addAttribute("post", new Post(
+                0, "Заполните поле",
+                "Заполните поле",
+                LocalDate.now(),
+                false,
+                new City(0, "Заполните поле")));
         model.addAttribute("cities", city.getAllCities());
         return "addPost";
     }

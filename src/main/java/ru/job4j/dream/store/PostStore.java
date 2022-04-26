@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 
 import java.time.LocalDate;
@@ -28,15 +29,21 @@ public class PostStore {
         posts.put(1, new Post(
                 1, "Junior Java Job",
                 "Collections",
-                LocalDate.of(2022, 04, 1)));
+                LocalDate.of(2022, 04, 1),
+                true,
+                new City(2, "Санкт-Петербург")));
         posts.put(2, new Post(
                 2, "Middle Java Job",
                 "IO, SQl, GC",
-                LocalDate.of(2022, 04, 5)));
+                LocalDate.of(2022, 04, 1),
+                true,
+                new City(3, "Екатеринбург")));
         posts.put(3, new Post(
                 3, "Senior Java Job",
                 "Spring, Hibernate",
-                LocalDate.of(2022, 04, 11)));
+                LocalDate.of(2022, 04, 1),
+                true,
+                new City(4, "Челябинск")));
     }
 
     public Collection<Post> findAll() {

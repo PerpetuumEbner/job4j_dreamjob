@@ -17,8 +17,8 @@ public class CandidateDBStoreTest {
                 2,
                 "Middle Java Job",
                 "IO, SQl, GC",
-                LocalDate.of(2022, 04, 5)
-                );
+                LocalDate.of(2022, 04, 5),
+                new byte[10]);
         store.add(candidate);
         Candidate candidateInDb = store.findById(candidate.getId());
         assertThat(candidateInDb.getName(), is(candidate.getName()));

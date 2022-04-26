@@ -18,18 +18,6 @@ public class Post implements Serializable {
     private boolean visible;
     private City city;
 
-    public Post(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Post(int id, String name, String description, LocalDate created) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.created = created;
-    }
-
     public Post(int id, String name, String description, LocalDate created, boolean visible, City city) {
         this.id = id;
         this.name = name;
@@ -93,13 +81,15 @@ public class Post implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
         return id == post.id &&
+                visible == post.visible &&
                 Objects.equals(name, post.name) &&
                 Objects.equals(description, post.description) &&
-                Objects.equals(created, post.created);
+                Objects.equals(created, post.created) &&
+                Objects.equals(city, post.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, created);
+        return Objects.hash(id, name, description, created, visible, city);
     }
 }

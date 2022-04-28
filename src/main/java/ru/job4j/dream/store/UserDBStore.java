@@ -40,6 +40,7 @@ public class UserDBStore {
                 while (it.next()) {
                     users.add(new User(
                             it.getInt("id"),
+                            it.getString("name"),
                             it.getString("email"),
                             it.getString("password")
                     ));
@@ -61,12 +62,13 @@ public class UserDBStore {
         Optional<User> optionalUser = Optional.empty();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "INSERT INTO users(email, password) VALUES (?, ?)")
+                     "INSERT INTO users(name, email, password) VALUES (?, ?, ?)")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    ps.setString(1, user.getEmail());
-                    ps.setString(2, user.getPassword());
+                    ps.setString(1, user.getName());
+                    ps.setString(2, user.getEmail());
+                    ps.setString(3, user.getPassword());
                     ps.execute();
                 }
             }
@@ -85,12 +87,13 @@ public class UserDBStore {
     public void update(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "UPDATE users SET email = ?, password = ?")
+                     "UPDATE users SET name  = ?, email = ?, password = ?")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    ps.setString(1, user.getEmail());
-                    ps.setString(2, user.getPassword());
+                    ps.setString(1, user.getName());
+                    ps.setString(2, user.getEmail());
+                    ps.setString(3, user.getPassword());
                     ps.execute();
                 }
             }
@@ -114,6 +117,7 @@ public class UserDBStore {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
                     it.getInt("id");
+                    it.getString("name");
                     it.getString("email");
                     it.getString("password");
                 }
@@ -135,6 +139,7 @@ public class UserDBStore {
                 if (it.next()) {
                     return Optional.of(new User(
                             it.getInt("id"),
+                            it.getString("name"),
                             it.getString("email"),
                             it.getString("password")));
                 }

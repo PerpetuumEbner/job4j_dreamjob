@@ -54,13 +54,14 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">ID</th>
+                <th scope="col">Name</th>
                 <th scope="col">Почта</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user: ${users}">
                 <td th:text="${user.id}"/>
+                <td th:text="${user.name}"/>
                 <td th:text="${user.email}"/>
             </tr>
             </tbody>

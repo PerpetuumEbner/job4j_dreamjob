@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
-import ru.job4j.dream.service.CityService;
+import ru.job4j.dream.store.CityStore;
 import ru.job4j.dream.service.PostService;
 
 import javax.servlet.http.HttpSession;
@@ -22,9 +22,9 @@ public class PostController {
 
     private final PostService store;
 
-    private final CityService city;
+    private final CityStore city;
 
-    public PostController(PostService store, CityService city) {
+    public PostController(PostService store, CityStore city) {
         this.store = store;
         this.city = city;
     }

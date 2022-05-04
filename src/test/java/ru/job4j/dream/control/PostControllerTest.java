@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
 import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
-import ru.job4j.dream.service.CityService;
+import ru.job4j.dream.store.CityStore;
 import ru.job4j.dream.service.PostService;
 
 import javax.servlet.http.HttpSession;
@@ -30,7 +30,7 @@ class PostControllerTest {
         HttpSession httpSession = mock(HttpSession.class);
         PostService postService = mock(PostService.class);
         when(postService.findAll()).thenReturn(posts);
-        CityService cityService = mock(CityService.class);
+        CityStore cityService = mock(CityStore.class);
         PostController postController = new PostController(postService, cityService);
         String page = postController.posts(model, httpSession);
         verify(model).addAttribute("posts", posts);
@@ -45,7 +45,7 @@ class PostControllerTest {
         HttpSession httpSession = mock(HttpSession.class);
         PostService postService = mock(PostService.class);
         when(postService.findById(0)).thenReturn(post);
-        CityService cityService = mock(CityService.class);
+        CityStore cityService = mock(CityStore.class);
         PostController postController = new PostController(postService, cityService);
         String page = postController.addPost(model, httpSession);
         verify(model).addAttribute("post", post);
@@ -57,7 +57,7 @@ class PostControllerTest {
         Post post = new Post(
                 1, "New post", "description", LocalDate.now(), true, new City(3, "Екатеринбург"));
         PostService postService = mock(PostService.class);
-        CityService cityService = mock(CityService.class);
+        CityStore cityService = mock(CityStore.class);
         PostController postController = new PostController(postService, cityService);
         String page = postController.createPost(post, 1);
         assertThat(page, is("redirect:/posts"));
@@ -68,7 +68,7 @@ class PostControllerTest {
         Post post = new Post(
                 1, "New post", "description", LocalDate.now(), true, new City(3, "Екатеринбург"));
         PostService postService = mock(PostService.class);
-        CityService cityService = mock(CityService.class);
+        CityStore cityService = mock(CityStore.class);
         PostController postController = new PostController(postService, cityService);
         String page = postController.updatePost(post);
         assertThat(page, is("redirect:/posts"));
@@ -79,7 +79,7 @@ class PostControllerTest {
         Model model = mock(Model.class);
         HttpSession httpSession = mock(HttpSession.class);
         PostService postService = mock(PostService.class);
-        CityService cityService = mock(CityService.class);
+        CityStore cityService = mock(CityStore.class);
         PostController postController = new PostController(postService, cityService);
         String page = postController.formUpdatePost(model, 1, httpSession);
         assertThat(page, is("updatePost"));

@@ -21,7 +21,7 @@
     <url>http://www.example.com</url>
 
     <properties>
-        <java.version>14</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <profiles>

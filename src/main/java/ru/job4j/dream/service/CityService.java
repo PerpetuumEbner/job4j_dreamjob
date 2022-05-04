@@ -1,29 +1,33 @@
 package ru.job4j.dream.service;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.dream.model.City;
+import ru.job4j.dream.store.CityStore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Верхний слой хранилища CityStore в котором находятся города.
+ *
+ * @author yustas
+ * @version 1.0
+ */
+@ThreadSafe
 @Service
 public class CityService {
-    private final Map<Integer, City> cities = new HashMap<>();
+    private final CityStore store;
 
-    public CityService() {
-        cities.put(1, new City(1, "Москва"));
-        cities.put(2, new City(2, "Санкт-Петербург"));
-        cities.put(3, new City(3, "Екатеринбург"));
-        cities.put(4, new City(4, "Челябинск"));
+    public CityService(CityStore store) {
+        this.store = store;
     }
 
     public List<City> getAllCities() {
-        return new ArrayList<>(cities.values());
+        return new ArrayList<>(store.getAllCities());
     }
 
     public City findById(int id) {
-        return cities.get(id);
+        return store.findById(id);
     }
 }

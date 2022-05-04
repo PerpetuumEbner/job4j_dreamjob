@@ -45,7 +45,7 @@ public class PostDBStore {
                             it.getString("description"),
                             it.getDate("created").toLocalDate(),
                             it.getBoolean("visible"),
-                            new City(it.getInt("id"), it.getString("name"))));
+                            new City(it.getInt("city_id"), null)));
                 }
             }
         } catch (Exception e) {
@@ -123,7 +123,7 @@ public class PostDBStore {
                             it.getString("description"),
                             it.getDate("created").toLocalDate(),
                             it.getBoolean("visible"),
-                            new City(it.getInt("id"), it.getString("name")));
+                            new City(it.getInt("city_id"), null));
                 }
             }
         } catch (Exception e) {
